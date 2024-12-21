@@ -1,0 +1,20 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for creating groups and users
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html
+- name: Ensure group 'mosquitto' exists
+  ansible.builtin.group:
+    name: mosquitto
+    state: present
+  tags: create_groups_and_users
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+- name: Create user 'mosquitto'
+  ansible.builtin.user:
+    name: mosquitto
+    create_home: false
+    shell: /bin/bash
+    groups: mosquitto
+    append: yes
+  tags: create_groups_and_users

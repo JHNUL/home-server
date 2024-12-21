@@ -2,11 +2,15 @@
 ---
 # tasks file for platform
 
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
 - name: Update and upgrade apt
   ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: 3600
     upgrade: yes
+    install_recommends: true
+  tags: apt
 
-- name: Ensure users are created
-  include_tasks: create-users.yaml
+- name: Ensure groups and users are created
+  include_tasks: create-groups-and-users.yaml
+  tags: create_groups_and_users
