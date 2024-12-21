@@ -1,0 +1,17 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for installing mosquitto broker
+
+
+#################################################
+# Mosquitto is available from debian repository #
+#################################################
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+- name: Install mosquitto broker version {{ mosquitto_broker_version }}
+  ansible.builtin.apt:
+    name: mosquitto={{ mosquitto_broker_version }}
+    state: present
+    allow_downgrade: no
+    install_recommends: yes
+  tags: install_mosquitto

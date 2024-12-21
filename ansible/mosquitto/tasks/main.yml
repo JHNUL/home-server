@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for mosquitto
+
+- name: Install mosquitto broker
+  include_tasks: install-mosquitto.yaml
+  tags: install_mosquitto
