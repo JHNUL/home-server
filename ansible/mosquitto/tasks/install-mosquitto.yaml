@@ -15,3 +15,7 @@
     allow_downgrade: no
     install_recommends: yes
   tags: install_mosquitto
+
+# The systemd service file lives here
+# /lib/systemd/system/mosquitto.service
+# check this site https://www.monotux.tech/posts/2022/01/mosquitto-systemd/
