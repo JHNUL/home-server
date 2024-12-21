@@ -6,13 +6,12 @@
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
 - name: Copy sources list
   ansible.builtin.copy:
-    become: yes
-    src: ./platform/files/sources.list
+    src: "{{ role_path }}/files/sources.list"
     dest: /etc/apt/sources.list
     owner: root
     group: root
     mode: 0644
-  tags: update_system_packages
+  tags: sources_list
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
 - name: Update and upgrade apt
@@ -21,4 +20,4 @@
     cache_valid_time: 3600
     upgrade: yes
     install_recommends: true
-  tags: update_system_packages
+  tags: apt_update
