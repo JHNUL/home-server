@@ -1,3 +1,7 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # handlers file for mosquitto
+
+- name: Reload Mosquitto
+  ansible.builtin.debug:
+    msg: TODO add reloading

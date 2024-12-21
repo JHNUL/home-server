@@ -5,3 +5,8 @@
 - name: Install mosquitto broker
   include_tasks: install-mosquitto.yaml
   tags: install_mosquitto
+
+
+- name: Configure mosquitto broker
+  include_tasks: configure-mosquitto.yaml
+  tags: configure_mosquitto

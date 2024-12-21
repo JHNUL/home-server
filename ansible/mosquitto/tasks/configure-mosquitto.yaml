@@ -1,0 +1,19 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for configuring mosquitto broker
+
+# The systemd service file lives here
+# /lib/systemd/system/mosquitto.service
+# check this site https://www.monotux.tech/posts/2022/01/mosquitto-systemd/
+# especially to not run mosquitto as root
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy mosquitto.conf file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/mosquitto.conf"
+    dest: /etc/mosquitto/mosquitto.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags: configure_mosquitto
+  notify: Reload Mosquitto
