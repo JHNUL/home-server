@@ -10,10 +10,6 @@
 # Service   /lib/systemd/system/mosquitto.service #
 ###################################################
 
-# check this site https://www.monotux.tech/posts/2022/01/mosquitto-systemd/
-
-# copy service file
-
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
 - name: Copy mosquitto logrotate file
   ansible.builtin.copy:
@@ -25,6 +21,18 @@
   tags: logrotate
   notify: Validate Mosquitto logrotate
 
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy mosquitto service file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/mosquitto.service"
+    dest: /lib/systemd/system/mosquitto.service
+    owner: root
+    group: root
+    mode: 0644
+  tags: service_file
+  notify: Reload Mosquitto configurations
+
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
 - name: Copy mosquitto.conf file
   ansible.builtin.copy:
@@ -34,4 +42,4 @@
     group: root
     mode: 0644
   tags: mosquitto_conf
-  notify: Hard reload Mosquitto
+  notify: Reload Mosquitto configurations

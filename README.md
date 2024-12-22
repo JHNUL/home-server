@@ -52,3 +52,20 @@ abdev --tags "configure_mosquitto,logrotate" playbooks/mosquitto.yaml --diff
 ```sh
 abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff
 ```
+
+### Manual checking in the remote box
+
+Check that the service is running with the correct properties
+`systemctl show mosquitto.service`
+
+To check an individual property, e.g. User
+`systemctl show mosquitto.service --property=User`
+
+Check logs with journalctl
+`journalctl -u mosquitto.service`
+
+Search the log file
+`egrep -i "searchsomething" /var/log/mosquitto/mosquitto.log`
+
+Tail the log stream
+`tail --follow -n 40 /var/log/mosquitto/mosquitto.log`
