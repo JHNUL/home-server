@@ -2,6 +2,22 @@
 ---
 # handlers file for mosquitto
 
-- name: Reload Mosquitto
-  ansible.builtin.debug:
-    msg: TODO add reloading
+######################################
+# Soft reload pics up config changes #
+######################################
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html
+- name: Reload Mosquitto configurations
+  ansible.builtin.systemd_service:
+    name: mosquitto.service
+    daemon_reload: true
+
+
+###################################################
+# Hard reload restarts and pics up config changes #
+###################################################
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html
+- name: Hard reload Mosquitto
+  ansible.builtin.systemd_service:
+    name: mosquitto.service
+    state: reloaded
+    daemon_reload: true

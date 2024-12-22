@@ -16,4 +16,4 @@
     group: root
     mode: 0644
   tags: configure_mosquitto
-  notify: Reload Mosquitto
+  notify: Hard reload Mosquitto
