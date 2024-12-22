@@ -38,7 +38,17 @@ abdev --tags "create_groups_and_users" playbooks/platform.yaml --diff
 abdev --tags "install_mosquitto" playbooks/mosquitto.yaml --diff
 ```
 
-#### Configure broker
+#### Configure broker configuration file
 ```sh
-abdev --tags "configure_mosquitto" playbooks/mosquitto.yaml --diff
+abdev --tags "configure_mosquitto,mosquitto_conf" playbooks/mosquitto.yaml --diff
+```
+
+#### Configure Mosquitto logrotation
+```sh
+abdev --tags "configure_mosquitto,logrotate" playbooks/mosquitto.yaml --diff
+```
+
+#### Configure Mosquitto systemd service file
+```sh
+abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff
 ```

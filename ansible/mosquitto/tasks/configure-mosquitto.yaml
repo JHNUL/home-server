@@ -2,10 +2,28 @@
 ---
 # tasks file for configuring mosquitto broker
 
-# The systemd service file lives here
-# /lib/systemd/system/mosquitto.service
+###################################################
+# Mosquitto file locations                        #
+# Database  /var/lib/mosquitto/mosquitto.db       #
+# Logs      /var/log/mosquitto/mosquitto.log      #
+# Config    /etc/mosquitto/mosquitto.conf         #
+# Service   /lib/systemd/system/mosquitto.service #
+###################################################
+
 # check this site https://www.monotux.tech/posts/2022/01/mosquitto-systemd/
-# especially to not run mosquitto as root
+
+# copy service file
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy mosquitto logrotate file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/mosquitto.logrotate"
+    dest: /etc/logrotate.d/mosquitto
+    owner: root
+    group: root
+    mode: 0644
+  tags: logrotate
+  notify: Validate Mosquitto logrotate
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
 - name: Copy mosquitto.conf file
@@ -15,5 +33,5 @@
     owner: root
     group: root
     mode: 0644
-  tags: configure_mosquitto
+  tags: mosquitto_conf
   notify: Hard reload Mosquitto

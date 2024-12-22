@@ -21,3 +21,14 @@
     name: mosquitto.service
     state: reloaded
     daemon_reload: true
+
+##############################################################
+# Check that logrotate configuration is syntactically valid. #
+##############################################################
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
+- name: Validate Mosquitto logrotate
+  ansible.builtin.command:
+    cmd: logrotate -d /etc/logrotate.d/mosquitto
+  register: logrotate_validation
+  failed_when: logrotate_validation.rc != 0 or 'error:' in logrotate_validation.stderr or 'error:' in logrotate_validation.stdout
+  changed_when: false
