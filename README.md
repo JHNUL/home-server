@@ -66,6 +66,11 @@ Following these steps there should be the following files `ca.crt, server.crt, s
 abdev --tags "install_mosquitto" playbooks/mosquitto.yaml --diff --check
 ```
 
+#### Configure configuration directory permissions
+```sh
+abdev --tags "configure_mosquitto,permissions" playbooks/mosquitto.yaml --diff --check
+```
+
 #### Configure broker configuration file
 ```sh
 abdev --tags "configure_mosquitto,mosquitto_conf" playbooks/mosquitto.yaml --diff --check
@@ -74,11 +79,6 @@ abdev --tags "configure_mosquitto,mosquitto_conf" playbooks/mosquitto.yaml --dif
 #### Configure Mosquitto logrotation
 ```sh
 abdev --tags "configure_mosquitto,logrotate" playbooks/mosquitto.yaml --diff --check
-```
-
-#### Configure logfile permissions
-```sh
-abdev --tags "configure_mosquitto,log_permissions" playbooks/mosquitto.yaml --diff --check
 ```
 
 #### Configure Mosquitto systemd service file
