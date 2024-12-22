@@ -35,6 +35,32 @@ abdev --tags "create_groups_and_users" playbooks/platform.yaml --diff --check
 
 ### Mosquitto broker
 
+In this setup the broker supports encrypted traffic via TLS. So first a CA certificate and key need to be generated. Add the appropriate duration.
+
+```sh
+openssl req -new -x509 -days <duration> -extensions v3_ca -keyout ca.key -out ca.crt
+```
+
+Generate a private key to be used by the MQTT broker.
+
+```sh
+openssl genrsa -out server.key 4096
+```
+
+Generate a signing request to send to the CA
+
+```sh
+openssl req -out server.csr -key server.key -new
+```
+
+Sign the signing request with the earlier created CA
+
+```sh
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days <duration>
+```
+
+Following these steps there should be the following files `ca.crt, server.crt, server.key` which need to be placed in the `mosquitto/files` folder.
+
 #### Install broker
 ```sh
 abdev --tags "install_mosquitto" playbooks/mosquitto.yaml --diff --check
@@ -60,7 +86,7 @@ abdev --tags "configure_mosquitto,log_permissions" playbooks/mosquitto.yaml --di
 abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff --check
 ```
 
-### Manual checking in the remote box
+### Manual checks in the remote box
 
 Check that the service is running with the correct properties
 `systemctl show mosquitto.service`

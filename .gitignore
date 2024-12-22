@@ -1,3 +1,7 @@
 .vscode/
 **/*.venv
 **/*.vagrant
+ansible/mosquitto/files/*.crt
+ansible/mosquitto/files/*.csr
+ansible/mosquitto/files/*.key
+ansible/mosquitto/files/*.srl
