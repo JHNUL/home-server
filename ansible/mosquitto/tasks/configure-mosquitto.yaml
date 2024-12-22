@@ -2,14 +2,6 @@
 ---
 # tasks file for configuring mosquitto broker
 
-###################################################
-# Mosquitto file locations                        #
-# Database  /var/lib/mosquitto/mosquitto.db       #
-# Logs      /var/log/mosquitto/mosquitto.log      #
-# Config    /etc/mosquitto/mosquitto.conf         #
-# Service   /lib/systemd/system/mosquitto.service #
-###################################################
-
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
 - name: Allow all mosquitto group members to read log
   ansible.builtin.file:
