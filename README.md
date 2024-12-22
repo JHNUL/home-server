@@ -1,19 +1,44 @@
-# Init
+# Home server setup
 
-Create user to box with vagrant user.
+Expects Debian 12 (bookworm) as operating system.
 
-```sh
-vagrant ssh
-sudo apt update # input vagrant default password
-su -l
-adduser <username>
-# ...
-usermod -aG sudo <username>
-```
+Configures and installs all OS and user packages and services in an automated way. Vagrant is used in development mode to setup the infrastructure in a virtual machine.
 
 ## Ansible
 
-https://spacelift.io/blog/ansible-tutorial
+All these commands must be run in the ansible folder. First activate python virtual environment and install dependencies from requirements.txt.
 
-Nopea tapa pistää pystyy rooli
-`ansible-galaxy init <role>`
+Setup shell aliases for commands:
+```sh
+alias abdev='ansible-playbook -i inventory-dev.yaml'
+alias abprod='ansible-playbook -i inventory.yaml'
+```
+
+### Operating system
+
+#### Copy sources.list file to remote host
+```sh
+abdev --tags "update_system_packages,sources_list" playbooks/platform.yaml --diff
+```
+
+#### Update system packages
+```sh
+abdev --tags "update_system_packages,apt_update" playbooks/platform.yaml --diff
+```
+
+#### Create groups and users
+```sh
+abdev --tags "create_groups_and_users" playbooks/platform.yaml --diff
+```
+
+### Mosquitto broker
+
+#### Install broker
+```sh
+abdev --tags "install_mosquitto" playbooks/mosquitto.yaml --diff
+```
+
+#### Configure broker
+```sh
+abdev --tags "configure_mosquitto" playbooks/mosquitto.yaml --diff
+```
