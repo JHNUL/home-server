@@ -49,8 +49,8 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/mosquitto.conf"
     dest: "{{ mosquitto_conf_file }}"
-    owner: root
-    group: root
+    owner: mosquitto
+    group: mosquitto
     mode: 0644
   tags: mosquitto_conf
-  notify: Reload Mosquitto configurations
+  notify: Hard reload Mosquitto
