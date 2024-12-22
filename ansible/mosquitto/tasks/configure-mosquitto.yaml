@@ -13,17 +13,18 @@
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
 - name: Allow all mosquitto group members to read log
   ansible.builtin.file:
-    path: /var/log/mosquitto/mosquitto.log
+    path: "{{ mosquitto_logfile }}"
     owner: mosquitto
     group: mosquitto
     mode: 0640
   tags: log_permissions
 
+
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
 - name: Copy mosquitto logrotate file
   ansible.builtin.copy:
     src: "{{ role_path }}/files/mosquitto.logrotate"
-    dest: /etc/logrotate.d/mosquitto
+    dest: "{{ mosquitto_logrotate_file }}"
     owner: root
     group: root
     mode: 0644
@@ -35,18 +36,19 @@
 - name: Copy mosquitto service file
   ansible.builtin.copy:
     src: "{{ role_path }}/files/mosquitto.service"
-    dest: /lib/systemd/system/mosquitto.service
+    dest: "{{ mosquitto_service_file }}"
     owner: root
     group: root
     mode: 0644
   tags: service_file
   notify: Reload Mosquitto configurations
 
+
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
 - name: Copy mosquitto.conf file
   ansible.builtin.copy:
     src: "{{ role_path }}/files/mosquitto.conf"
-    dest: /etc/mosquitto/mosquitto.conf
+    dest: "{{ mosquitto_conf_file }}"
     owner: root
     group: root
     mode: 0644

@@ -8,6 +8,8 @@ Configures and installs all OS and user packages and services in an automated wa
 
 All these commands must be run in the ansible folder. First activate python virtual environment and install dependencies from requirements.txt.
 
+The commands are appended with the `--check` option to prevent accidental copy-paste-run changes.
+
 Setup shell aliases for commands:
 ```sh
 alias abdev='ansible-playbook -i inventory-dev.yaml'
@@ -18,44 +20,44 @@ alias abprod='ansible-playbook -i inventory.yaml'
 
 #### Copy sources.list file to remote host
 ```sh
-abdev --tags "update_system_packages,sources_list" playbooks/platform.yaml --diff
+abdev --tags "update_system_packages,sources_list" playbooks/platform.yaml --diff --check
 ```
 
 #### Update system packages
 ```sh
-abdev --tags "update_system_packages,apt_update" playbooks/platform.yaml --diff
+abdev --tags "update_system_packages,apt_update" playbooks/platform.yaml --diff --check
 ```
 
 #### Create groups and users
 ```sh
-abdev --tags "create_groups_and_users" playbooks/platform.yaml --diff
+abdev --tags "create_groups_and_users" playbooks/platform.yaml --diff --check
 ```
 
 ### Mosquitto broker
 
 #### Install broker
 ```sh
-abdev --tags "install_mosquitto" playbooks/mosquitto.yaml --diff
+abdev --tags "install_mosquitto" playbooks/mosquitto.yaml --diff --check
 ```
 
 #### Configure broker configuration file
 ```sh
-abdev --tags "configure_mosquitto,mosquitto_conf" playbooks/mosquitto.yaml --diff
+abdev --tags "configure_mosquitto,mosquitto_conf" playbooks/mosquitto.yaml --diff --check
 ```
 
 #### Configure Mosquitto logrotation
 ```sh
-abdev --tags "configure_mosquitto,logrotate" playbooks/mosquitto.yaml --diff
+abdev --tags "configure_mosquitto,logrotate" playbooks/mosquitto.yaml --diff --check
 ```
 
 #### Configure logfile permissions
 ```sh
-abdev --tags "configure_mosquitto,log_permissions" playbooks/mosquitto.yaml --diff
+abdev --tags "configure_mosquitto,log_permissions" playbooks/mosquitto.yaml --diff --check
 ```
 
 #### Configure Mosquitto systemd service file
 ```sh
-abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff
+abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff --check
 ```
 
 ### Manual checking in the remote box
