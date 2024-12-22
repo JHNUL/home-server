@@ -86,6 +86,11 @@ abdev --tags "configure_mosquitto,log_permissions" playbooks/mosquitto.yaml --di
 abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff --check
 ```
 
+#### Configure Mosquitto certificates for TLS
+```sh
+abdev --tags "configure_mosquitto,mosquitto_tls" playbooks/mosquitto.yaml --diff --check
+```
+
 ### Manual checks in the remote box
 
 Check that the service is running with the correct properties

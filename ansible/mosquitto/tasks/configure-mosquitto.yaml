@@ -40,9 +40,45 @@
 - name: Copy mosquitto.conf file
   ansible.builtin.copy:
     src: "{{ role_path }}/files/mosquitto.conf"
-    dest: "{{ mosquitto_conf_file }}"
+    dest: "{{ mosquitto_conf_path }}/mosquitto.conf"
     owner: mosquitto
     group: mosquitto
     mode: 0644
   tags: mosquitto_conf
+  notify: Hard reload Mosquitto
+
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy CA file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/ca.crt"
+    dest: "{{ mosquitto_conf_path }}/ca.crt"
+    owner: mosquitto
+    group: mosquitto
+    mode: 0644
+  tags: mosquitto_tls
+  notify: Hard reload Mosquitto
+
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy cert file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/server.crt"
+    dest: "{{ mosquitto_conf_path }}/server.crt"
+    owner: mosquitto
+    group: mosquitto
+    mode: 0644
+  tags: mosquitto_tls
+  notify: Hard reload Mosquitto
+
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy server keyfile
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/server.key"
+    dest: "{{ mosquitto_conf_path }}/server.key"
+    owner: mosquitto
+    group: mosquitto
+    mode: 0600
+  tags: mosquitto_tls
   notify: Hard reload Mosquitto

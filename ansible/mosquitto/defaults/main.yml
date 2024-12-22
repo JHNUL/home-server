@@ -11,5 +11,5 @@ mosquitto_broker_version: 2.0.11-1.2+deb12u1
 mosquitto_database_file: /var/lib/mosquitto/mosquitto.db
 mosquitto_logfile: /var/log/mosquitto/mosquitto.log
 mosquitto_logrotate_file: /etc/logrotate.d/mosquitto
-mosquitto_conf_file: /etc/mosquitto/mosquitto.conf
+mosquitto_conf_path: /etc/mosquitto
 mosquitto_service_file: /lib/systemd/system/mosquitto.service
