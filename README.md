@@ -48,6 +48,11 @@ abdev --tags "configure_mosquitto,mosquitto_conf" playbooks/mosquitto.yaml --dif
 abdev --tags "configure_mosquitto,logrotate" playbooks/mosquitto.yaml --diff
 ```
 
+#### Configure logfile permissions
+```sh
+abdev --tags "configure_mosquitto,log_permissions" playbooks/mosquitto.yaml --diff
+```
+
 #### Configure Mosquitto systemd service file
 ```sh
 abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff
