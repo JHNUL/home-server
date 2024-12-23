@@ -91,6 +91,13 @@ abdev --tags "configure_mosquitto,service_file" playbooks/mosquitto.yaml --diff 
 abdev --tags "configure_mosquitto,mosquitto_tls" playbooks/mosquitto.yaml --diff --check
 ```
 
+#### Configure username and password authentication
+```sh
+abdev --tags "configure_mosquitto,mosquitto_client_passwords" playbooks/mosquitto.yaml --diff --check
+```
+
+When using username and password authentication, the passwordfile can be created with mosquitto_passwd utility.
+
 ### Manual checks in the remote box
 
 Check that the service is running with the correct properties

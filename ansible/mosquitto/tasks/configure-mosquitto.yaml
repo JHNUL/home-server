@@ -93,3 +93,14 @@
     mode: 0600
   tags: mosquitto_tls
   notify: Hard reload Mosquitto
+
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Copy password file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/pwfile"
+    dest: "{{ mosquitto_conf_path }}/pwfile"
+    owner: mosquitto
+    group: mosquitto
+    mode: 0644
+  tags: mosquitto_client_passwords
