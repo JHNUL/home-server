@@ -1,3 +1,21 @@
+- [Home server setup](#home-server-setup)
+  - [Ansible](#ansible)
+    - [Operating system](#operating-system)
+      - [Copy sources.list file to remote host](#copy-sourceslist-file-to-remote-host)
+      - [Update system packages](#update-system-packages)
+      - [Create groups and users](#create-groups-and-users)
+    - [Mosquitto broker](#mosquitto-broker)
+      - [Install broker](#install-broker)
+      - [Configure configuration directory permissions](#configure-configuration-directory-permissions)
+      - [Configure broker configuration file](#configure-broker-configuration-file)
+      - [Configure Mosquitto logrotation](#configure-mosquitto-logrotation)
+      - [Configure Mosquitto systemd service file](#configure-mosquitto-systemd-service-file)
+      - [Configure Mosquitto certificates for TLS](#configure-mosquitto-certificates-for-tls)
+      - [Configure username and password authentication](#configure-username-and-password-authentication)
+    - [Manual checks in the remote box](#manual-checks-in-the-remote-box)
+    - [Connect to MQTT Broker](#connect-to-mqtt-broker)
+
+
 # Home server setup
 
 Expects Debian 12 (bookworm) as operating system.
@@ -114,3 +132,13 @@ Search the log file
 
 Tail the log stream
 `tail --follow -n 40 /var/log/mosquitto/mosquitto.log`
+
+
+### Connect to MQTT Broker
+
+Using MQTT Explorer:
+ - point to localhost:8883 (Port-forwarding configured in Vagrantfile)
+ - enable TLS
+ - use the username and password created in pwfile (for now uses username, password authentication)
+
+![kuva](/docs/images/mqtt_explorer.png)
