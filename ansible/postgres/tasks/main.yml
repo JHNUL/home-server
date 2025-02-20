@@ -4,3 +4,7 @@
 - name: Install PostgreSQL Database
   include_tasks: install-postgres.yaml
   tags: install_postgres
+
+- name: Configure PostgreSQL Database
+  include_tasks: configure-postgres.yaml
+  tags: configure_postgres

@@ -1,0 +1,15 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for configuring PostgreSQL database
+
+# https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_user_module.html
+- name: Connect to default database and change postgres user's password
+  community.postgresql.postgresql_user:
+    db: postgres
+    user: postgres
+    password: "{{ lookup('ansible.builtin.env', 'PG_USER_PW') }}"
+  environment:
+    PGOPTIONS: "-c password_encryption=scram-sha-256"
+  notify: Hard reload Mosquitto
+  tags: configure_postgres
+

@@ -4,3 +4,4 @@
 
 
 postgresql_version: 16
+psycopg2_version: 2.9.10-1.pgdg120+1
