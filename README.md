@@ -34,6 +34,8 @@ alias abdev='ansible-playbook -i inventory-dev.yaml'
 alias abprod='ansible-playbook -i inventory.yaml'
 ```
 
+To create a new folder structure use `ansible-galaxy role init {role_name}`.
+
 ### Operating system
 
 #### Copy sources.list file to remote host
