@@ -1,0 +1,31 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for installing PostgreSQL database
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+- name: Install prerequisites
+  ansible.builtin.apt:
+    pkg:
+    - curl
+    - ca-certificates
+    install_recommends: yes
+  tags: install_postgres_prerequisites
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html
+- name: Configure repository script
+  ansible.builtin.shell: |
+    sudo install -d /usr/share/postgresql-common/pgdg
+    sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+  tags: configure_postgres_repository
+
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+- name: Install PostgreSQL database
+  ansible.builtin.apt:
+    name: postgresql-{{ postgresql_version }}
+    state: present
+    allow_downgrade: no
+    install_recommends: yes
+    update_cache: true
+  tags: install_postgres_database
