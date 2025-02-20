@@ -13,3 +13,9 @@
   notify: Hard reload Mosquitto
   tags: configure_postgres
 
+# TODO: Cannot change password due to Peer authentication failed for user \"postgres\"\n"
+# --> maybe change in pg_hba.conf, (location: sudo -u postgres psql -c 'show hba_file')
+
+# TODO: Create a db user other than default
+# TODO: Create named schema/database for whatever domain the application is going to be (e.g. homeserver)
+# TODO: Create a relational schema for the domain data model which consists of persisted messages
